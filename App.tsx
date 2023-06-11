@@ -2,7 +2,7 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {Navigator} from './navigators/TabsNavigator';
+import {StackNavigator} from './navigators';
 
 const queryClient = new QueryClient();
 
@@ -10,7 +10,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <Navigator />
+        <StackNavigator />
       </NavigationContainer>
     </QueryClientProvider>
   );

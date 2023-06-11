@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "379022219755",
+    "project_id": "movieapp-7957f",
+    "storage_bucket": "movieapp-7957f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379022219755:android:6688c70dfcaf5b351661ae",
+        "android_client_info": {
+          "package_name": "com.flixflex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379022219755-34p5rv10o6an3apku0gfapqqh377dmcn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKwF8VuF5A-J7zRZ-HbdZX6yCuLRweQBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379022219755-34p5rv10o6an3apku0gfapqqh377dmcn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

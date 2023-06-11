@@ -30,7 +30,9 @@ const createStackNavigator = (Component: any) => {
   return StackNavigator;
 };
 
-export const Navigator = () => {
+export const TabsNavigator = () => {
+  console.log('ssss');
+
   return (
     <Tab.Navigator
       initialRouteName="Movies"

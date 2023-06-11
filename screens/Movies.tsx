@@ -39,7 +39,6 @@ const Movies = () => {
     error: errorTopMovie,
     status: statusTopMovie,
   } = useGetTopMovies();
-  console.log(topMovies);
 
   // Prefetch the next page
   useEffect(() => {
