@@ -16,7 +16,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/core';
 import {TMDBMovie} from '../types/apiTypes';
 export type RootStackParamList = {
-  MovieSerieDetails: {id: number} | undefined;
+  MovieSerieDetails: {id: number; type: string} | undefined;
 };
 
 const Movies = () => {
@@ -52,7 +52,7 @@ const Movies = () => {
   }, [movies, isPreviousData, page, queryClient]);
 
   const handleItemPress = (item: TMDBMovie) => {
-    navigation.navigate('MovieSerieDetails', {id: item.id});
+    navigation.navigate('MovieSerieDetails', {id: item.id, type: 'movie'});
   };
   const scrollToAllMovies = () => {
     allMoviesRef.current?.measureLayout(

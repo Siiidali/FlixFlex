@@ -1,18 +1,42 @@
-import {View, Text, StyleSheet} from 'react-native';
-import {useFocusEffect, useRoute} from '@react-navigation/native';
-import {TMDBMovie, TMDBShow} from '../types/apiTypes';
-import {useGetSerie} from '../hooks/series';
+import {View, Text, StyleSheet, Image} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import {useGetMovieOrSerie} from '../hooks/movieSerie';
+import YouTube from 'react-native-youtube';
 
 export default function MovieSerieDetaills() {
   const route = useRoute();
   const {id, type} = route.params as {id: number; type: string};
+  console.log(id);
 
-  const {data, isLoading, isError, error} =
-    type === 'serie' ? useGetSerie(id) : useGetSerie(id);
-
+  const {data, isLoading, isError, error} = useGetMovieOrSerie(id, type);
+  if (isLoading)
+    return (
+      <View style={styles.container}>
+        <Text>is loading ...</Text>
+      </View>
+    );
   return (
     <View style={styles.container}>
-      <Text>MovieDetaills</Text>
+      <View style={styles.card}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: `http://image.tmdb.org/t/p/w500/${data?.poster_path}`,
+            height: 250,
+            width: 150,
+          }}
+        />
+        <Text style={styles.title}>
+          {type === 'movie' ? data.title : data.name}
+        </Text>
+      </View>
+      <View style={{gap: 5}}>
+        <Text style={styles.overview}>{data.overview}</Text>
+        <Text style={styles.informations}>Popularity : {data.popularity}</Text>
+      </View>
+      <View>
+        <Text style={styles.title}>Trailer : </Text>
+      </View>
     </View>
   );
 }
@@ -21,5 +45,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
+    paddingTop: 15,
+    gap: 10,
+    paddingHorizontal: 15,
+  },
+  card: {
+    alignItems: 'center',
+    gap: 10,
+    borderRadius: 5,
+  },
+  image: {
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+  },
+  title: {
+    fontSize: 15,
+    textAlign: 'center',
+    color: 'white',
+    fontWeight: '900',
+  },
+  informations: {
+    color: 'white',
+  },
+  overview: {
+    color: 'white',
   },
 });

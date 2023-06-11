@@ -1,7 +1,7 @@
 import {useQuery} from '@tanstack/react-query';
 import {getMovie, getMovies, getTop5Movies} from '../api/movies';
 import {AxiosError} from 'axios';
-import {TMDBApiResponse, TMDBApiResponseDetails} from '../types/apiTypes';
+import {TMDBApiResponse, TMDBMovieDetails} from '../types/apiTypes';
 
 export const useGetMovies = (page: number) => {
   const query = useQuery<TMDBApiResponse, AxiosError>({
@@ -27,7 +27,7 @@ export const useGetTopMovies = () => {
 };
 
 export const useGetMovie = (id: number) => {
-  const query = useQuery<TMDBApiResponseDetails, AxiosError>({
+  const query = useQuery<TMDBMovieDetails, AxiosError>({
     queryKey: ['movie', id],
     queryFn: async () => {
       return await getMovie(id);
