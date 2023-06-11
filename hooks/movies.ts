@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import {getMovie, getMovies, getTop5Movies} from '../api/movies';
+import {getMovie, getMovieVideo, getMovies, getTop5Movies} from '../api/movies';
 import {AxiosError} from 'axios';
 import {TMDBApiResponse, TMDBMovieDetails} from '../types/apiTypes';
 
@@ -33,6 +33,16 @@ export const useGetMovie = (id: number) => {
       return await getMovie(id);
     },
     staleTime: 5000,
+  });
+  return query;
+};
+
+export const useGetMovieTrailler = (id: number) => {
+  const query = useQuery<any | null, AxiosError>({
+    queryKey: ['movieTrailler', id],
+    queryFn: async () => {
+      return await getMovieVideo(id);
+    },
   });
   return query;
 };

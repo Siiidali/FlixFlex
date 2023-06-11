@@ -1,7 +1,8 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {useGetMovieOrSerie} from '../hooks/movieSerie';
-import YouTube from 'react-native-youtube';
+import {useGetMovieTrailler} from '../hooks/movies';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 export default function MovieSerieDetaills() {
   const route = useRoute();
@@ -9,6 +10,9 @@ export default function MovieSerieDetaills() {
   console.log(id);
 
   const {data, isLoading, isError, error} = useGetMovieOrSerie(id, type);
+  const {data: trailler} = useGetMovieTrailler(id);
+  console.log(trailler);
+
   if (isLoading)
     return (
       <View style={styles.container}>
@@ -16,7 +20,7 @@ export default function MovieSerieDetaills() {
       </View>
     );
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.card}>
         <Image
           style={styles.image}
@@ -34,10 +38,20 @@ export default function MovieSerieDetaills() {
         <Text style={styles.overview}>{data.overview}</Text>
         <Text style={styles.informations}>Popularity : {data.popularity}</Text>
       </View>
-      <View>
-        <Text style={styles.title}>Trailer : </Text>
-      </View>
-    </View>
+      {trailler && trailler.length && (
+        <View>
+          <Text style={styles.title}>Trailer : </Text>
+          <YoutubePlayer height={300} play={true} videoId={trailler[0].key} />
+
+          {/* <YouTubePlayer videoId={trailler[0].id} /> */}
+          {/* <YouTube
+            videoId={trailler[0].id} // Replace with the YouTube video ID
+            apiKey="AIzaSyA6g45Yt89nnwD7NSvRU2K5O6sGGTGVwIQ" // Replace with your YouTube API key
+            style={{alignSelf: 'stretch', height: 300}}
+          /> */}
+        </View>
+      )}
+    </ScrollView>
   );
 }
 
