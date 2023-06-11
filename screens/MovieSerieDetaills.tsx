@@ -10,13 +10,25 @@ export default function MovieSerieDetaills() {
   console.log(id);
 
   const {data, isLoading, isError, error} = useGetMovieOrSerie(id, type);
-  const {data: trailler} = useGetMovieTrailler(id);
-  console.log(trailler);
+  const {
+    data: trailler,
+    isLoading: isLoadingTrailler,
+    isError: isErrorTrailler,
+    error: errorTrailler,
+  } = useGetMovieTrailler(id);
+  console.log(isErrorTrailler);
+  console.log(errorTrailler);
 
   if (isLoading)
     return (
       <View style={styles.container}>
         <Text>is loading ...</Text>
+      </View>
+    );
+  if (isError)
+    return (
+      <View style={styles.container}>
+        <Text>{error.response.data.message}</Text>
       </View>
     );
   return (
@@ -34,23 +46,28 @@ export default function MovieSerieDetaills() {
           {type === 'movie' ? data.title : data.name}
         </Text>
       </View>
-      <View style={{gap: 5}}>
+      <View style={{gap: 20}}>
         <Text style={styles.overview}>{data.overview}</Text>
         <Text style={styles.informations}>Popularity : {data.popularity}</Text>
       </View>
-      {trailler && trailler.length && (
-        <View>
-          <Text style={styles.title}>Trailer : </Text>
+      <View>
+        <Text style={styles.title}>Trailer : </Text>
+        {isLoadingTrailler ? (
+          <View>
+            <Text style={{color: 'white'}}>is loading ...</Text>
+          </View>
+        ) : null}
+        {isErrorTrailler ? (
+          <View>
+            <Text style={{color: 'white'}}>
+              The trailler of this coudn't be found
+            </Text>
+          </View>
+        ) : null}
+        {trailler && trailler.length && (
           <YoutubePlayer height={300} play={true} videoId={trailler[0].key} />
-
-          {/* <YouTubePlayer videoId={trailler[0].id} /> */}
-          {/* <YouTube
-            videoId={trailler[0].id} // Replace with the YouTube video ID
-            apiKey="AIzaSyA6g45Yt89nnwD7NSvRU2K5O6sGGTGVwIQ" // Replace with your YouTube API key
-            style={{alignSelf: 'stretch', height: 300}}
-          /> */}
-        </View>
-      )}
+        )}
+      </View>
     </ScrollView>
   );
 }

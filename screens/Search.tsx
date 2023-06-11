@@ -10,8 +10,17 @@ import {
 import {useSearch} from '../hooks/search';
 import Content from '../components/Content';
 import {useFocusEffect} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/core';
+import {TMDBMovie, TMDBShow} from '../types/apiTypes';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+export type RootStackParamList = {
+  MovieSerieDetails: {id: number; type: string} | undefined;
+};
 
 const Search = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [movieOrSerie, setMovieorSerie] = useState<string>('');
   const {data, isLoading, isError, error} = useSearch(movieOrSerie);
 
@@ -20,6 +29,10 @@ const Search = () => {
       setMovieorSerie('');
     }, []),
   );
+
+  const handleItemPress = (item: TMDBShow & TMDBMovie) => {
+    navigation.navigate('MovieSerieDetails', {id: item.id, type: 'serie'});
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -35,7 +48,14 @@ const Search = () => {
         <View>
           <FlatList
             data={data?.results}
-            renderItem={({item}) => <Content element={item} />}
+            renderItem={({item}) => (
+              <Content
+                element={item}
+                onPress={() => {
+                  handleItemPress(item);
+                }}
+              />
+            )}
             numColumns={2}
             keyExtractor={item => item.id.toString()}
             contentContainerStyle={{paddingBottom: 200}}

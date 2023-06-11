@@ -102,6 +102,7 @@ const Movies = () => {
           <View style={{gap: 20}}>
             <FlatList
               data={movies.results}
+              scrollEnabled={false}
               renderItem={({item}) => (
                 <Content
                   onPress={() => {

@@ -1,11 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
 import Movies from '../screens/Movies';
 import Series from '../screens/Series';
 import Search from '../screens/Search';
-import CustomIcon from '../components/CustomIcon';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MovieSerieDetaills from '../screens/MovieSerieDetaills';
+import {Image} from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -52,7 +51,10 @@ export const Navigator = () => {
             fontWeight: 'bold',
           },
           tabBarIcon: ({color}) => (
-            <CustomIcon name="film" color={color} size={20} />
+            <Image
+              source={require('../assets/movie.png')}
+              style={{height: 20, width: 20}}
+            />
           ),
         }}
       />
@@ -67,7 +69,10 @@ export const Navigator = () => {
             fontWeight: 'bold',
           },
           tabBarIcon: ({color}) => (
-            <CustomIcon name="plus" color={color} size={20} />
+            <Image
+              source={require('../assets/tv-show.png')}
+              style={{height: 20, width: 20}}
+            />
           ),
         }}
       />
@@ -82,7 +87,10 @@ export const Navigator = () => {
             fontWeight: 'bold',
           },
           tabBarIcon: ({color}) => (
-            <CustomIcon name="search" color={color} size={20} />
+            <Image
+              source={require('../assets/search.png')}
+              style={{height: 20, width: 20}}
+            />
           ),
         }}
       />

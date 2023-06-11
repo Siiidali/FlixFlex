@@ -103,6 +103,7 @@ const Movies = () => {
         ) : (
           <View style={{gap: 20}}>
             <FlatList
+              scrollEnabled={false}
               data={series.results}
               renderItem={({item}) => (
                 <Content
