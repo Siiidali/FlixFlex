@@ -16,18 +16,12 @@ const SignIn = () => {
 
   const handleSignIn = () => {
     auth()
-      .createUserWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
-        console.log('User account created & signed in!');
+        console.log('User signed in!');
       })
       .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
+        console.log('That email address is already in use!');
 
         console.error(error);
       });
