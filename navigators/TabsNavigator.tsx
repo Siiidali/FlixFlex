@@ -5,6 +5,7 @@ import Search from '../screens/Search';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MovieSerieDetaills from '../screens/MovieSerieDetaills';
 import {Image} from 'react-native';
+import SignIn from '../screens/SignIn';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -62,7 +63,7 @@ export const TabsNavigator = () => {
       />
       <Tab.Screen
         name="Series"
-        component={createStackNavigator(Series)}
+        component={createStackNavigator(SignIn)}
         options={{
           title: 'Series',
           headerStyle: {backgroundColor: 'black'},

@@ -46,23 +46,25 @@ const Search = () => {
           placeholderTextColor="white"
         />
         <View>
-          <FlatList
-            data={data?.results}
-            renderItem={({item}) => (
-              <Content
-                element={item}
-                onPress={() => {
-                  handleItemPress(item);
-                }}
-              />
-            )}
-            numColumns={2}
-            keyExtractor={item => item.id.toString()}
-            contentContainerStyle={{paddingBottom: 200}}
-            columnWrapperStyle={{justifyContent: 'space-between'}}
-            key={'#'}
-            ItemSeparatorComponent={() => <View style={styles.rowSperator} />}
-          />
+          {data && (
+            <FlatList
+              data={data?.results}
+              renderItem={({item}) => (
+                <Content
+                  element={item}
+                  onPress={() => {
+                    handleItemPress(item);
+                  }}
+                />
+              )}
+              numColumns={2}
+              keyExtractor={item => item.id.toString()}
+              contentContainerStyle={{paddingBottom: 200}}
+              columnWrapperStyle={{justifyContent: 'space-between'}}
+              key={'#'}
+              ItemSeparatorComponent={() => <View style={styles.rowSperator} />}
+            />
+          )}
         </View>
       </View>
     </KeyboardAvoidingView>

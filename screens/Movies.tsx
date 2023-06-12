@@ -28,6 +28,7 @@ const Movies = () => {
   const [page, setPages] = useState<number>(1);
   const {
     data: movies,
+    isError,
     status,
     error,
     isPreviousData,
@@ -36,6 +37,7 @@ const Movies = () => {
 
   const {
     data: topMovies,
+    isError: isErrorTopMovies,
     error: errorTopMovie,
     status: statusTopMovie,
   } = useGetTopMovies();
@@ -61,9 +63,9 @@ const Movies = () => {
       },
     );
   };
+  console.log(error);
 
-  if (status === 'error')
-    return <Text>{error.response!.data!.toString()}</Text>;
+  if (isError) return <Text>{error?.response?.data?.toString()}</Text>;
   if (status === 'loading') return <Text>is loading</Text>;
 
   return (
